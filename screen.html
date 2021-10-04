@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 10px solid blue; height: 100%"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        let movementX = 1;
+        let movementY = 1;
+
+        context.fillStyle = 'red';
+        context.fillRect(0,0,40,40);
+
+        class Player{
+
+            constructor(x,y,xi,yi,speed){
+                this.x = x;
+                this.y = y;
+                this.xi = xi;
+                this.yi = yi;
+                this.speed = speed;
+            }
+
+            movement(key){
+                switch(key.toLowerCase()){
+                    case 'w':
+                        this.y-= this.speed;
+                        break;
+                    case 's':
+                        this.y+= this.speed;
+                        break;
+                    case 'a':
+                        this.x-= this.speed;
+                        break;
+                    case 'd':
+                        this.x+=this.speed;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        const p1 = new Player(0,0,40,40,5);
+
+        function mymove(x,y){
+            context.clearRect(0,0,canvas.width, canvas.height);
+            context.fillRect(p1.x,p1.y,p1.xi,p1.yi);
+        }
+
+        document.onkeypress = (e) => {
+            p1.movement(e.key);
+        }
+
+        setInterval(mymove,1)
+
+    </script>
+</body>
+</html>
